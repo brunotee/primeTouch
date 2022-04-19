@@ -1,0 +1,19 @@
+<p (click)="startPlayComp()">{{donnee.value}} est Divisible ?  cliquer!</p>
+<div *ngIf="isStartPlay" class="compoStyle">
+<button (click)="sayDivisible(true)" [disable]="!EnableBoutDivise">Divisible</button> 
+<button (click)="sayDivisible(false)"[disable]="!EnableBoutPrem">Premier!</button>
+<div> il vous reste {{10 - (valeurTimer |async) }} secondes</div>
+<p *ngIf="endTimeShown | async">Le temps est ecoulé</p>
+<ng-container *ngIf="10 - (valeurTimer |async)">
+    
+    <!-- divisable == false && choixJoueur == 'divisabled'-->
+    <p *ngIf="choixJoueur != null && !divisable && choixJoueur =='prime'">Oui il est Premier !</p>
+    <p *ngIf="choixJoueur != null && !divisable && choixJoueur =='divisabled'">Hé non il est pas divisable (pas factorisable)</p>
+    <p *ngIf="choixJoueur != null && divisable && choixJoueur =='prime'"> Il était Divisable !</p>
+    <p *ngIf="choixJoueur != null && divisable && choixJoueur =='divisabled'"> OUI , factorisable !   </p>
+    <div *ngIf="choixJoueur != null && divisable">
+        <span *ngFor="let elem Of donnee.facteurs" [ngClass]="{factorsreveal: true}">
+        {{elem}}</span>
+    </div>
+</ng-container>
+</div>
